@@ -6,8 +6,6 @@ edition = "2021"
 categories = ["embedded", "hardware-support", "no-std"]
 description = "Simple 'Hello World!' snippet for nucleo-h743zi development board"
 keywords = ["arm", "cortex-m", "stm32h7xx", "hal"]
-license = "MIT"
-repository = "https://github.com/"
 
 [dependencies]
 cortex-m-rt = "0.7.1"
@@ -21,6 +19,7 @@ stm32h7xx-hal = { version="0.11.0", features=["stm32h743v"] }
 debug = true
 
 [profile.release]
+codegen-units = 1
 debug = true
 lto = true
 opt-level = "s"

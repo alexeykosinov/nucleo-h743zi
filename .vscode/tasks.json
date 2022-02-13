@@ -1,0 +1,68 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Cargo Build Debug",
+			"type": "shell",
+			"command": "cargo",
+			"args": [
+				"build"
+			],
+			"problemMatcher": [
+				"$rustc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Cargo Build Release",
+			"type": "shell",
+			"command": "cargo",
+			"args": [
+				"build",
+				"--release"
+			],
+			"problemMatcher": [
+				"$rustc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Build Binary Release",
+			"type": "shell",
+			"command": "arm-none-eabi-objcopy",
+			"args": [
+				"--output-target",
+				"binary",
+				"${workspaceFolder}/target/thumbv7em-none-eabi/release/main",
+				"${workspaceFolder}/target/thumbv7em-none-eabi/release/main.bin"
+			],
+			"problemMatcher": [
+				"$rustc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"dependsOn": "Cargo Build Release"
+		},
+		{
+			"label": "Build Binary Debug",
+			"type": "shell",
+			"command": "arm-none-eabi-objcopy",
+			"args": [
+				"--output-target",
+				"binary",
+				"${workspaceFolder}/target/thumbv7em-none-eabi/debug/main",
+				"${workspaceFolder}/target/thumbv7em-none-eabi/debug/main.bin"
+			],
+			"problemMatcher": [
+				"$rustc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"dependsOn": "Cargo Build Debug"
+		}
+	]
+}

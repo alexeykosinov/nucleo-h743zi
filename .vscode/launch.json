@@ -1,0 +1,50 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Release",
+			"request": "launch",
+			"type": "cortex-debug",
+			"cwd": "${workspaceRoot}",
+			"executable": "${workspaceFolder}/target/thumbv7em-none-eabi/release/main",
+			"svdFile": "${workspaceFolder}/stm32h743x.svd",
+			"servertype": "openocd",
+			"showDevDebugOutput": false,
+			"configFiles": [
+				"openocd.cfg"
+			],
+			"preLaunchTask": "Build Binary Release",
+			"preLaunchCommands": [
+				"monitor init",
+				"monitor reset init",
+				"monitor halt",
+				"monitor arm semihosting enable",
+				"monitor flash write_image erase ./target/thumbv7em-none-eabi/release/main.bin 0x08000000"
+			],
+			"postLaunchCommands": [
+				"continue"
+			]
+		},
+		{
+			"name": "Debug",
+			"request": "launch",
+			"type": "cortex-debug",
+			"cwd": "${workspaceRoot}",
+			"executable": "${workspaceFolder}/target/thumbv7em-none-eabi/debug/main",
+			"svdFile": "${workspaceFolder}/stm32h743x.svd",
+			"servertype": "openocd",
+			"showDevDebugOutput": false,
+			"configFiles": [
+				"openocd.cfg"
+			],
+			"preLaunchTask": "Build Binary Debug",
+			"preLaunchCommands": [
+				"monitor init",
+				"monitor reset init",
+				// "monitor halt",
+				"monitor arm semihosting enable",
+				"monitor flash write_image erase ./target/thumbv7em-none-eabi/debug/main.bin 0x08000000"
+			]
+		}
+	]
+}
